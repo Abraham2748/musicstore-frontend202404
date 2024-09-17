@@ -5,11 +5,17 @@
       <h1>MUSICAL EVENTS</h1>
     </div>
     <div class="search-container">
-      <input type="text" placeholder="Buscar..." />
+      <input
+        type="text"
+        placeholder="Buscar..."
+        [formControl]="searchBarFormControl"
+      />
     </div>
     <div class="buttons-container">
-      <button mat-button class="primary">INGRESAR</button>
-      <button mat-button class="accent">REGÍSTRATE</button>
+      <button routerLink="/login" mat-button class="primary">INGRESAR</button>
+      <button routerLink="/register" mat-button class="accent">
+        REGÍSTRATE
+      </button>
     </div>
   </div>
 </header>
