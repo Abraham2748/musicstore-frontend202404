@@ -1,0 +1,28 @@
+:root {
+  --mat-select-enabled-trigger-text-color: white;
+  --mat-option-label-text-color: var(--primary-color);
+  --mat-select-panel-background-color: var(--secondary-color);
+  --mat-option-selected-state-label-text-color: white;
+  --mat-select-enabled-arrow-color: var(--primary-color);
+  --mat-select-focused-arrow-color: white;
+  --mdc-filled-text-field-container-color: var(--secondary-color);
+  --mdc-filled-text-field-focus-label-text-color: var(--primary-color);
+  --mdc-filled-text-field-label-text-color: var(--primary-color);
+  --mdc-filled-text-field-focus-active-indicator-color: var(--primary-color);
+  --mdc-filled-text-field-hover-label-text-color: white;
+  --mdc-outlined-text-field-disabled-label-text-color: gray;
+  --mdc-outlined-text-field-disabled-outline-color: gray;
+  --mat-select-disabled-arrow-color: gray;
+  --mat-option-selected-state-layer-color: var(--primary-color);
+}
+
+/*  Check icon color */
+.mat-pseudo-checkbox-minimal.mat-pseudo-checkbox-checked::after {
+  color: white !important;
+}
+
+/* Item on hover */
+.mat-mdc-option:hover:not(.mdc-list-item--disabled) {
+  background-color: var(--accent-color) !important;
+  color: white;
+}

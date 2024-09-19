@@ -1,0 +1,36 @@
+.page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  & .content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    & .filter {
+      width: 940px;
+      margin-top: 30px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      & span {
+        margin-bottom: 20px;
+        font-weight: 500;
+        font-size: 16px;
+      }
+    }
+    & .event-list {
+      width: 1000px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+      margin-bottom: 40px;
+      & app-event-card {
+        cursor: pointer;
+        border-radius: 8px;
+      }
+    }
+  }
+}

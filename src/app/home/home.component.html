@@ -1,22 +1,27 @@
-<app-header></app-header>
+<div class="page-container">
+  <app-header></app-header>
 
-<div>
-  <div>
-    <mat-form-field>
-      <mat-label>Género musical</mat-label>
-      <mat-select>
-        <mat-option value="1">Cumbia</mat-option>
-        <mat-option value="2">Salsa</mat-option>
-        <mat-option value="3">Merengue</mat-option>
-        <mat-option value="4">Reggae</mat-option>
-        <mat-option value="5">Rock</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <span>Selecciona tu género musical favorito</span>
+  <div class="content-container">
+    <div class="filter">
+      <mat-form-field>
+        <mat-label>Género musical</mat-label>
+        <mat-select [formControl]="currentGenre">
+          <mat-option [value]="0">Todos</mat-option>
+          @for (genre of genres; track genre.id) {
+          <mat-option [value]="genre.id">{{ genre.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <span>Selecciona tu género musical favorito</span>
+    </div>
+    <div class="event-list">
+      @for (concert of concerts; track concert.id) {
+      <app-event-card appHighlightable [data]="concert"></app-event-card>
+      } @empty {
+      <h3>No encontramos conciertos :c</h3>
+      }
+    </div>
   </div>
-  <div>
-    <app-event-card></app-event-card>
-  </div>
+
+  <app-footer></app-footer>
 </div>
-
-<app-footer></app-footer>

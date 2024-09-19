@@ -1,18 +1,18 @@
-<div class="container">
+<div class="container box-shadow">
   <div class="superior">
     <div class="date-time-container">
-      <span class="date">14 de marzo 2020</span>
-      <span class="time">14:30 PM</span>
+      <span class="date">{{ data.dateEvent }}</span>
+      <span class="time">{{ data.timeEvent }}</span>
     </div>
     <div class="genre-container">
-      <span>ROCK</span>
+      <span>{{ data.genre }}</span>
     </div>
   </div>
   <div class="middle">
-    <img src="images/generic-concert-poster.jpg" alt="event-image" />
+    <img [src]="data.imageUrl" alt="event-image" />
   </div>
   <div class="bottom">
-    <span class="description">Bon Jovi en concierto, no te lo pierdas</span>
-    <span class="place">CC TEATRO LIGAS, LIMA</span>
+    <span class="description">{{ data.description | textLimiter : 40 }}</span>
+    <span class="place">{{ data.place | textLimiter : 24 }}</span>
   </div>
 </div>
