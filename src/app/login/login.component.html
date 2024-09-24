@@ -1,1 +1,36 @@
-<p>login works!</p>
+<div class="page-container">
+  <app-simple-header></app-simple-header>
+  <div class="title-container">
+    <div class="title">
+      <span>Ingresa a Musical Events para comprar</span>
+    </div>
+  </div>
+  <div class="content-container">
+    <div class="card box-shadow">
+      <div class="form-title-container">
+        <span class="form-title">INICIO DE SESIÓN</span>
+      </div>
+      <form>
+        <mat-form-field class="email" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" />
+        </mat-form-field>
+        <mat-form-field class="password" appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input matInput type="password" />
+        </mat-form-field>
+        <div class="forgot-password">
+          <span routerLink="/forgot-password">¿Olvidaste tu contraseña?</span>
+        </div>
+        <button class="box-shadow" mat-flat-button>INGRESAR</button>
+        <div class="register">
+          <span
+            >Si no tienes una cuenta
+            <span class="text-link">regístrate</span></span
+          >
+        </div>
+      </form>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

@@ -1,0 +1,10 @@
+:root {
+  --mdc-outlined-text-field-input-text-color: white;
+  --mdc-outlined-text-field-label-text-color: var(--primary-color);
+  --mdc-outlined-text-field-focus-label-text-color: var(--primary-color);
+  --mdc-outlined-text-field-outline-color: var(--primary-color);
+  --mdc-outlined-text-field-focus-outline-color: var(--primary-color);
+  --mdc-outlined-text-field-hover-outline-color: var(--primary-color);
+  --mdc-outlined-text-field-hover-label-text-color: white;
+  --mdc-outlined-text-field-disabled-input-text-color: gray;
+}
