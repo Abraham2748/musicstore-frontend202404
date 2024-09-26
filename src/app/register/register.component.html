@@ -1,1 +1,104 @@
-<p>register works!</p>
+<div class="page-container">
+  <app-simple-header></app-simple-header>
+  <div class="title-container">
+    <div class="title">
+      <span>Regístrate, ingresa tus datos</span>
+    </div>
+  </div>
+  <div class="content-container">
+    <div class="card box-shadow">
+      <div class="form-title-container">
+        <span class="form-title">REGISTRO</span>
+      </div>
+      <form [formGroup]="registerForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombres</mat-label>
+          <input
+            matInput
+            type="text"
+            [formControl]="registerForm.controls.name"
+          />
+          <mat-error>Nombre es <strong>requerido</strong></mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Apellidos</mat-label>
+          <input
+            matInput
+            type="text"
+            [formControl]="registerForm.controls.lastName"
+          />
+          <mat-error>Apellidos es <strong>requerido</strong></mat-error>
+        </mat-form-field>
+        <mat-form-field class="email" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" />
+          @if(registerForm.controls.email.hasError('required')) {
+          <mat-error>Email es requerido</mat-error>
+          } @if (registerForm.controls.email.hasError("email")) {
+          <mat-error>Ingresa un email válido</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Edad</mat-label>
+          <input
+            matInput
+            type="number"
+            [formControl]="registerForm.controls.age"
+          />
+          <mat-error>Edad es <strong>requerida</strong></mat-error>
+        </mat-form-field>
+        <mat-form-field class="password" appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <input
+            matInput
+            type="password"
+            [formControl]="registerForm.controls.password"
+          />
+          @if(registerForm.controls.password.hasError('required')) {
+          <mat-error>Contraseña es requerida</mat-error>
+          } @if (registerForm.controls.password.hasError("minlength")) {
+          <mat-error>Contraseña debe tener al menos 8 caracteres</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Documento</mat-label>
+          <mat-select [formControl]="registerForm.controls.documentType">
+            <mat-option value="0">DNI</mat-option>
+            <mat-option value="1">CE</mat-option>
+            <mat-option value="2">PASAPORTE</mat-option>
+            <mat-option value="3">OTROS</mat-option>
+          </mat-select>
+          <mat-error>Documento es <strong>requerido</strong></mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nro Documento</mat-label>
+          <input
+            matInput
+            type="text"
+            [formControl]="registerForm.controls.documentNumber"
+          />
+          <mat-error>Nro Documento es <strong>requerido</strong></mat-error>
+        </mat-form-field>
+
+        <button
+          [disabled]="registerForm.invalid"
+          class="box-shadow"
+          mat-flat-button
+          (click)="register()"
+        >
+          REGISTRAR
+        </button>
+        <div class="login">
+          <span
+            >Si tienes una cuenta
+            <span routerLink="/login" class="text-link">ingresa</span></span
+          >
+        </div>
+      </form>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

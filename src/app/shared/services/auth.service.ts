@@ -1,7 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { LoginApiResponse } from '../models/auth.model';
+import { LoginApiResponse, RegisterRequestBody } from '../models/auth.model';
 import { catchError, EMPTY, of } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 
@@ -23,6 +23,17 @@ export class AuthService {
         username: email,
         password,
       })
+      .pipe(
+        catchError((error) => {
+          alert(error.error.errorMessage);
+          return EMPTY;
+        })
+      );
+  }
+
+  register(body: RegisterRequestBody) {
+    return this.http
+      .post<LoginApiResponse>(this.baseUrl + 'users/register', body)
       .pipe(
         catchError((error) => {
           alert(error.error.errorMessage);

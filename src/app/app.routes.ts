@@ -5,7 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { AdminComponent } from './admin/admin.component';
 import { CustomerComponent } from './customer/customer.component';
-import { isLoggedIn } from './app.guard';
+import { isNotLoggedIn } from './app.guard';
 
 export const routes: Routes = [
   {
@@ -22,7 +22,7 @@ export const routes: Routes = [
     path: 'login',
     pathMatch: 'full',
     component: LoginComponent,
-    canActivate: [isLoggedIn],
+    canActivate: [isNotLoggedIn],
   },
   {
     path: 'register',
