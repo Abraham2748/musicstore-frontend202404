@@ -4,6 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { HeaderService } from './header.service';
 import { map, Observable } from 'rxjs';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -15,6 +16,7 @@ import { RouterLink } from '@angular/router';
 export class HeaderComponent {
   searchBarFormControl = new FormControl('');
   headerService = inject(HeaderService);
+  authService = inject(AuthService);
 
   constructor() {
     this.headerService.searchValue$ =

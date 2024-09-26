@@ -1,15 +1,21 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { LoginApiResponse } from '../models/auth.model';
 import { catchError, EMPTY, of } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  baseUrl = environment.baseUrl;
-  http = inject(HttpClient);
+  private baseUrl = environment.baseUrl;
+  private http = inject(HttpClient);
+
+  email = signal('');
+  name = signal('');
+  role = signal('');
+  isLoggedIn = signal(false);
 
   login(email: string, password: string) {
     return this.http
@@ -23,5 +29,35 @@ export class AuthService {
           return EMPTY;
         })
       );
+  }
+
+  verifyToken() {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
+    const jwtDecoded: any = jwtDecode(token);
+    const email: string =
+      jwtDecoded[
+        'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
+      ];
+    const name: string =
+      jwtDecoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+    const role: string =
+      jwtDecoded[
+        'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+      ];
+    this.email.set(email);
+    this.name.set(name);
+    this.role.set(role);
+    this.isLoggedIn.set(true);
+  }
+
+  logout() {
+    localStorage.clear();
+    this.email.set('');
+    this.name.set('');
+    this.role.set('');
+    this.isLoggedIn.set(false);
+    alert('Cierre de sesión correcto');
   }
 }
