@@ -42,6 +42,22 @@ export class AuthService {
       );
   }
 
+  sendToken(email: string) {
+    return this.http
+      .post<LoginApiResponse>(
+        this.baseUrl + 'users/RequestTokenToResetPassword',
+        {
+          email,
+        }
+      )
+      .pipe(
+        catchError((error) => {
+          alert(error.error.errorMessage);
+          return EMPTY;
+        })
+      );
+  }
+
   verifyToken() {
     const token = localStorage.getItem('token');
     if (!token) return;
