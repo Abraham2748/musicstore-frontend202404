@@ -1,8 +1,13 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { LoginApiResponse, RegisterRequestBody } from '../models/auth.model';
-import { catchError, EMPTY, of } from 'rxjs';
+import {
+  LoginApiResponse,
+  RegisterRequestBody,
+  ResetPasswordApiResponse,
+  ResetPasswordRequestBody,
+} from '../models/auth.model';
+import { catchError, EMPTY, Observable, of } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
@@ -86,5 +91,19 @@ export class AuthService {
     this.role.set('');
     this.isLoggedIn.set(false);
     alert('Cierre de sesión correcto');
+  }
+
+  resetPassword(body: ResetPasswordRequestBody) {
+    return this.http
+      .post<ResetPasswordApiResponse>(
+        this.baseUrl + 'users/ResetPassword',
+        body
+      )
+      .pipe(
+        catchError((error) => {
+          alert(error.error.errorMessage);
+          return EMPTY;
+        })
+      );
   }
 }

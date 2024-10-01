@@ -39,16 +39,9 @@ export class ForgotPasswordComponent {
   sendToken(email: string) {
     this.authService.sendToken(email).subscribe((response) => {
       alert('Token enviado');
-      this.matDialog.open(ResetPasswordDialogComponent);
+      this.matDialog.open(ResetPasswordDialogComponent, {
+        data: { email },
+      });
     });
-
-    // this.authService.login(email, password).subscribe((response) => {
-    //   localStorage.setItem('token', response.data.token);
-    //   this.authService.verifyToken();
-    //   alert('Inicio de sesión correcto');
-    //   const nextRoute =
-    //     this.authService.role() === 'Administrator' ? '/admin' : '/customer';
-    //   this.router.navigate([nextRoute]);
-    // });
   }
 }

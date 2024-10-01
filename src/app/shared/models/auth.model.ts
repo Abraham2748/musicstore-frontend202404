@@ -17,3 +17,13 @@ export interface RegisterRequestBody {
   age: number;
   confirmPassword: string;
 }
+export interface ResetPasswordRequestBody {
+  email: string;
+  token: string;
+  newPassword: string;
+  confirmNewPassword: string;
+}
+export interface ResetPasswordApiResponse {
+  success: boolean;
+  errorMessage: string;
+}
