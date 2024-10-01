@@ -1,1 +1,28 @@
-<p>logged-in-header works!</p>
+<header class="box-shadow">
+  <div class="container">
+    <div class="logo-container" routerLink="/home">
+      <img src="images/logo.png" alt="logo" />
+      <h1>MUSICAL EVENTS</h1>
+    </div>
+    @if(authService.isLoggedIn()){
+    <div class="name-container">
+      <span>{{ authService.name() + " - " + authService.role() }}</span>
+    </div>
+    <div class="buttons-container">
+      <button routerLink="/my-account" mat-button class="primary">
+        MI CUENTA
+      </button>
+      <button (click)="authService.logout()" mat-button class="accent">
+        CERRAR SESIÓN
+      </button>
+    </div>
+    } @else {
+    <div class="buttons-container">
+      <button routerLink="/login" mat-button class="primary">INGRESAR</button>
+      <button routerLink="/register" mat-button class="accent">
+        REGÍSTRATE
+      </button>
+    </div>
+    }
+  </div>
+</header>

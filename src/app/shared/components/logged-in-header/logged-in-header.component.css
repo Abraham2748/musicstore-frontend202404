@@ -1,0 +1,44 @@
+header {
+  background-color: var(--secondary-color);
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  & .container {
+    width: 1000px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    & .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      & img {
+        height: 50px;
+        width: 50px;
+      }
+      & h1 {
+        font-size: 16px;
+        color: white;
+        font-weight: 500;
+        margin: 0;
+      }
+    }
+    & .name-container {
+      width: 500px;
+      text-align: right;
+      color: white;
+      font-size: 14px;
+    }
+    & .buttons-container {
+      display: flex;
+      gap: 10px;
+      & .primary {
+        color: var(--primary-color);
+      }
+      & .accent {
+        color: var(--accent-color);
+      }
+    }
+  }
+}

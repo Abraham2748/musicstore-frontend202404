@@ -6,6 +6,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { AdminComponent } from './admin/admin.component';
 import { CustomerComponent } from './customer/customer.component';
 import { isNotLoggedIn } from './app.guard';
+import { EventDetailComponent } from './event-detail/event-detail.component';
 
 export const routes: Routes = [
   {
@@ -43,5 +44,10 @@ export const routes: Routes = [
     path: 'customer',
     pathMatch: 'full',
     component: CustomerComponent,
+  },
+  {
+    path: 'event-detail/:id',
+    pathMatch: 'full',
+    component: EventDetailComponent,
   },
 ];

@@ -1,1 +1,75 @@
-<p>buy-dialog works!</p>
+<div
+  style="
+    width: 240px;
+    height: 360px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--secondary-color);
+    padding: 20px;
+  "
+>
+  <section
+    style="
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    "
+  >
+    <span
+      style="color: var(--primary-color); text-align: center; font-size: 24px"
+    >
+      {{ data.title }}
+    </span>
+    <br />
+    <span style="font-size: 18px; color: white; font-weight: 500"
+      >PRECIO:
+      <span style="color: var(--accent-color)"
+        >S/{{ data.unitPrice.toFixed(2) }}</span
+      ></span
+    >
+  </section>
+  <form
+    style="
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    "
+  >
+    <mat-form-field appearance="outline">
+      <mat-label>Cantidad</mat-label>
+      <input
+        matInput
+        type="number"
+        ngModel
+        name="quantity"
+        #quantity="ngModel"
+        max="10"
+        required
+      />
+      @if(quantity.errors?.['required']){
+      <mat-error>Campo <b>requerido</b></mat-error
+      >} @if(!quantity.errors?.['required'] && quantity.errors?.['max']){
+      <mat-error><b>10 Compras</b> como máximo</mat-error>}
+    </mat-form-field>
+    <br />
+    <div>
+      <span style="font-size: 18px; color: white; font-weight: 500"
+        >TOTAL: S/{{ data.unitPrice * (quantity.value ? quantity.value : 0) }}
+      </span>
+    </div>
+  </form>
+  <section style="width: 100%">
+    <button
+      style="width: 100%"
+      mat-flat-button
+      [disabled]="quantity.invalid"
+      (click)="buyTickets(quantity.value)"
+    >
+      PAGAR
+    </button>
+  </section>
+</div>

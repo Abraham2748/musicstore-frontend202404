@@ -14,3 +14,15 @@ export interface Concert {
   finalized: boolean;
   status: string;
 }
+
+export interface GetConcertByIdApiResponse {
+  data: Concert;
+  success: boolean;
+  errorMessage: string;
+}
+
+export interface BuyTicketsApiResponse {
+  data: number;
+  success: boolean;
+  errorMessage: string;
+}
