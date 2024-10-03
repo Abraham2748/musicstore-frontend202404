@@ -93,6 +93,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "defaultConfiguration": "production",
+          "configurations": {
+            "production": {
+              "baseHref": "https://abraham2748.github.io/musicstore-frontend202404/",
+              "repo": "https://github.com/Abraham2748/musicstore-frontend202404"
+            }
+          }
         }
       }
     }
