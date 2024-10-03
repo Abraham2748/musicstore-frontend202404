@@ -7,6 +7,8 @@ import { AdminComponent } from './admin/admin.component';
 import { CustomerComponent } from './customer/customer.component';
 import { isNotLoggedIn } from './app.guard';
 import { EventDetailComponent } from './event-detail/event-detail.component';
+import { MyPurchasesComponent } from './customer/my-purchases/my-purchases.component';
+import { ChangePasswordComponent } from './customer/change-password/change-password.component';
 
 export const routes: Routes = [
   {
@@ -42,8 +44,25 @@ export const routes: Routes = [
   },
   {
     path: 'customer',
-    pathMatch: 'full',
+    pathMatch: 'prefix',
     component: CustomerComponent,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'my-purchases',
+      },
+      {
+        path: 'my-purchases',
+        pathMatch: 'full',
+        component: MyPurchasesComponent,
+      },
+      {
+        path: 'change-password',
+        pathMatch: 'full',
+        component: ChangePasswordComponent,
+      },
+    ],
   },
   {
     path: 'event-detail/:id',

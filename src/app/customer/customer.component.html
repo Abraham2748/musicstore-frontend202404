@@ -1,1 +1,27 @@
-<p>customer works!</p>
+<div class="page-container">
+  <app-logged-in-header></app-logged-in-header>
+  <div class="container" style="height: 100%">
+    <section class="navigation">
+      <div
+        class="nav-item my-purchases box-shadow"
+        routerLink="/customer/my-purchases"
+        routerLinkActive="active"
+      >
+        <img src="images/customer/my-purchases.png" alt="my-purchases" />
+        <span>MIS COMPRAS</span>
+      </div>
+      <div
+        class="nav-item change-password box-shadow"
+        routerLink="/customer/change-password"
+        routerLinkActive="active"
+      >
+        <img src="images/customer/change-password.png" alt="change-password" />
+        <span>CAMBIAR CONTRASEÑA</span>
+      </div>
+    </section>
+    <section class="current-content">
+      <router-outlet></router-outlet>
+    </section>
+  </div>
+  <app-footer></app-footer>
+</div>

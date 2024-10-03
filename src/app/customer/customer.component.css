@@ -1,0 +1,49 @@
+.page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  & .navigation {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+    & .nav-item {
+      height: 110px;
+      background-color: var(--secondary-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      cursor: pointer;
+      & img {
+        height: 60px;
+      }
+      & span {
+        margin-top: 8px;
+        font-weight: 500;
+        color: white;
+      }
+    }
+    & .my-purchases {
+      width: 100px;
+      & span {
+        padding: 0 10px;
+        line-height: 16px;
+        text-align: center;
+      }
+    }
+    & .change-password {
+      width: 140px;
+      & span {
+        padding: 0 10px;
+        line-height: 16px;
+        text-align: center;
+      }
+    }
+  }
+}
+
+.active {
+  background-color: var(--primary-color) !important;
+}
