@@ -50,6 +50,7 @@ export class EventDetailComponent implements OnInit {
         'Debes iniciar sesión para comprar boletos'
       );
       this.router.navigate(['/login']);
+      return;
     }
 
     if (this.authService.role() === 'Administrator') {
