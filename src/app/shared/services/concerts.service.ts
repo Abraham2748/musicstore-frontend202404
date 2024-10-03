@@ -6,6 +6,7 @@ import {
   GetConcertByIdApiResponse,
 } from '../models/concert.model';
 import { catchError, EMPTY } from 'rxjs';
+import { SaleApiResponse } from '../models/sale.model';
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +32,17 @@ export class ConcertsService {
         concertId: eventId,
         ticketsQuantity: quantity,
       })
+      .pipe(
+        catchError((error) => {
+          alert(error.error.errorMessage);
+          return EMPTY;
+        })
+      );
+  }
+
+  getSale(saleId: number) {
+    return this.http
+      .get<SaleApiResponse>(this.baseUrl + 'sales/?id=' + saleId)
       .pipe(
         catchError((error) => {
           alert(error.error.errorMessage);

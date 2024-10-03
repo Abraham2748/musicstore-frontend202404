@@ -1,1 +1,40 @@
-<p>voucher-dialog works!</p>
+<div
+  style="
+    width: 240px;
+    height: 380px;
+    background-color: var(--secondary-color);
+    padding: 20px;
+    font-weight: 500;
+    color: white;
+    font-size: 16px;
+    line-height: 22px;
+  "
+>
+  @if(sale){
+  <h1 style="color: var(--primary-color); font-size: 20px">VOUCHER</h1>
+  <div style="padding-bottom: 8px">
+    <span class="title">Nro. Operación</span><br />
+    <span class="data">{{ sale.operationNumber }}</span
+    ><br />
+    <br />
+    <span class="title">Cliente</span><br />
+    <span class="data">{{ sale.fullName }}</span
+    ><br />
+    <br />
+    <span class="title">Nro. Tickets</span><br />
+    <span class="data">{{ sale.quantity }}</span
+    ><br />
+    <br />
+    <span class="title">Fecha de Pago</span><br />
+    <span class="data">{{ sale.saleDate }}</span
+    ><br />
+  </div>
+  <br />
+  <span style="color: var(--primary-color); font-size: 18px"
+    >Total:
+    <span style="color: var(--accent-color); margin-left: 4px"
+      >S/ {{ sale.total.toFixed(2) }}</span
+    ></span
+  >
+  }
+</div>

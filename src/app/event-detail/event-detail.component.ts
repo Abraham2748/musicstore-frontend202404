@@ -58,8 +58,11 @@ export class EventDetailComponent implements OnInit {
     buyDialogRef.afterClosed().subscribe((saleId) => {
       if (saleId) {
         alert('Boletos comprados exitosamente');
-        this.matDialog.open(VoucherDialogComponent, {
+        const voucherDialogRef = this.matDialog.open(VoucherDialogComponent, {
           data: saleId,
+        });
+        voucherDialogRef.afterClosed().subscribe(() => {
+          this.router.navigate(['/home']);
         });
       }
     });
