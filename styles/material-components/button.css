@@ -1,0 +1,9 @@
+:root {
+  --mdc-filled-button-container-color: var(--primary-color);
+  --mdc-filled-button-label-text-color: var(--secondary-color);
+  --mdc-filled-button-container-shape: 8px;
+  --mat-filled-button-horizontal-padding: 12px;
+  --mdc-filled-button-container-height: 30px;
+  --mdc-filled-button-disabled-label-text-color: gray;
+  --mdc-filled-button-disabled-container-color: darkgray;
+}
