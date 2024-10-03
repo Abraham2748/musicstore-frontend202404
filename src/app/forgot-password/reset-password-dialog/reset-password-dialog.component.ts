@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../../shared/services/auth.service';
 import { Router } from '@angular/router';
 import { DialogRef } from '@angular/cdk/dialog';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-reset-password-dialog',
@@ -19,6 +20,7 @@ export class ResetPasswordDialogComponent {
   authService = inject(AuthService);
   router = inject(Router);
   dialogRef = inject(DialogRef);
+  notifications = inject(NotificationsService);
 
   verifyPasswords(form: NgForm) {
     const password = form.controls['password'];
@@ -45,7 +47,7 @@ export class ResetPasswordDialogComponent {
       })
       .subscribe((response) => {
         if (response.success) {
-          alert('Contraseña cambiada con éxito');
+          this.notifications.success('Contraseña actualizada', 'Inicia sesión');
           this.router.navigate(['/login']);
           this.dialogRef.close();
         }

@@ -15,6 +15,7 @@ import { SimpleHeaderComponent } from '../shared/components/simple-header/simple
 import { AuthService } from '../shared/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ResetPasswordDialogComponent } from './reset-password-dialog/reset-password-dialog.component';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-forgot-password',
@@ -35,10 +36,11 @@ export class ForgotPasswordComponent {
   authService = inject(AuthService);
   router = inject(Router);
   matDialog = inject(MatDialog);
+  notifications = inject(NotificationsService);
 
   sendToken(email: string) {
     this.authService.sendToken(email).subscribe((response) => {
-      alert('Token enviado');
+      this.notifications.success('Token enviado', 'Revisa tu correo');
       this.matDialog.open(ResetPasswordDialogComponent, {
         data: { email },
       });

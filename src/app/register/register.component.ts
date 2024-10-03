@@ -14,6 +14,7 @@ import { SimpleHeaderComponent } from '../shared/components/simple-header/simple
 import { AuthService } from '../shared/services/auth.service';
 import { MatSelectModule } from '@angular/material/select';
 import { RegisterRequestBody } from '../shared/models/auth.model';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-register',
@@ -46,6 +47,7 @@ export class RegisterComponent {
     documentType: new FormControl('', [Validators.required]),
     documentNumber: new FormControl('', [Validators.required]),
   });
+  notifications = inject(NotificationsService);
 
   register() {
     const body: RegisterRequestBody = {
@@ -59,7 +61,7 @@ export class RegisterComponent {
       password: this.registerForm.controls.password.value!,
     };
     this.authService.register(body).subscribe(() => {
-      alert('Registro exitoso');
+      this.notifications.success('Registro exitoso', 'Logueate para continuar');
       this.router.navigate(['/login']);
     });
   }

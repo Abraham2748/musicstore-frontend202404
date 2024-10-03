@@ -9,6 +9,7 @@ import {
 } from '../models/auth.model';
 import { catchError, EMPTY, Observable, of } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
+import { NotificationsService } from 'angular2-notifications';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,7 @@ export class AuthService {
   name = signal('');
   role = signal('');
   isLoggedIn = signal(false);
+  notifications = inject(NotificationsService);
 
   login(email: string, password: string) {
     return this.http
@@ -30,7 +32,7 @@ export class AuthService {
       })
       .pipe(
         catchError((error) => {
-          alert(error.error.errorMessage);
+          this.notifications.error('Error', error.error.errorMessage);
           return EMPTY;
         })
       );
@@ -41,7 +43,7 @@ export class AuthService {
       .post<LoginApiResponse>(this.baseUrl + 'users/register', body)
       .pipe(
         catchError((error) => {
-          alert(error.error.errorMessage);
+          this.notifications.error('Error', error.error.errorMessage);
           return EMPTY;
         })
       );
@@ -57,7 +59,7 @@ export class AuthService {
       )
       .pipe(
         catchError((error) => {
-          alert(error.error.errorMessage);
+          this.notifications.error('Error', error.error.errorMessage);
           return EMPTY;
         })
       );
@@ -90,7 +92,7 @@ export class AuthService {
     this.name.set('');
     this.role.set('');
     this.isLoggedIn.set(false);
-    alert('Cierre de sesión correcto');
+    this.notifications.success('Logout exitoso', 'Hasta luego');
   }
 
   resetPassword(body: ResetPasswordRequestBody) {
@@ -101,7 +103,7 @@ export class AuthService {
       )
       .pipe(
         catchError((error) => {
-          alert(error.error.errorMessage);
+          this.notifications.error('Error', error.error.errorMessage);
           return EMPTY;
         })
       );

@@ -11,6 +11,7 @@ import { AuthService } from '../shared/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { BuyDialogComponent } from './buy-dialog/buy-dialog.component';
 import { VoucherDialogComponent } from '../shared/components/voucher-dialog/voucher-dialog.component';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-event-detail',
@@ -33,6 +34,7 @@ export class EventDetailComponent implements OnInit {
   authService = inject(AuthService);
   router = inject(Router);
   matDialog = inject(MatDialog);
+  notifications = inject(NotificationsService);
 
   ngOnInit() {
     this.eventId = this.activatedRoute.snapshot.params['id'];
@@ -43,12 +45,18 @@ export class EventDetailComponent implements OnInit {
 
   openBuyDialog() {
     if (!this.authService.isLoggedIn()) {
-      alert('Debes iniciar sesión para comprar boletos');
+      this.notifications.warn(
+        'Error',
+        'Debes iniciar sesión para comprar boletos'
+      );
       this.router.navigate(['/login']);
     }
 
     if (this.authService.role() === 'Administrator') {
-      alert('Los administradores no pueden comprar boletos');
+      this.notifications.warn(
+        'Error',
+        'Los administradores no pueden comprar boletos'
+      );
       return;
     }
 
@@ -57,7 +65,7 @@ export class EventDetailComponent implements OnInit {
     });
     buyDialogRef.afterClosed().subscribe((saleId) => {
       if (saleId) {
-        alert('Boletos comprados exitosamente');
+        this.notifications.success('Compra exitosa', 'Gracias por tu compra');
         const voucherDialogRef = this.matDialog.open(VoucherDialogComponent, {
           data: saleId,
         });

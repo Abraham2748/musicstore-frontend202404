@@ -7,6 +7,7 @@ import {
 } from '../models/concert.model';
 import { catchError, EMPTY } from 'rxjs';
 import { SaleApiResponse } from '../models/sale.model';
+import { NotificationsService } from 'angular2-notifications';
 
 @Injectable({
   providedIn: 'root',
@@ -14,13 +15,14 @@ import { SaleApiResponse } from '../models/sale.model';
 export class ConcertsService {
   private http = inject(HttpClient);
   private baseUrl = environment.baseUrl;
+  notifications = inject(NotificationsService);
 
   getConcertById(id: string) {
     return this.http
       .get<GetConcertByIdApiResponse>(this.baseUrl + 'concerts/' + id)
       .pipe(
         catchError((error) => {
-          alert(error.error.errorMessage);
+          this.notifications.error('Error', error.error.errorMessage);
           return EMPTY;
         })
       );
@@ -34,7 +36,7 @@ export class ConcertsService {
       })
       .pipe(
         catchError((error) => {
-          alert(error.error.errorMessage);
+          this.notifications.error('Error', error.error.errorMessage);
           return EMPTY;
         })
       );
@@ -45,7 +47,7 @@ export class ConcertsService {
       .get<SaleApiResponse>(this.baseUrl + 'sales/?id=' + saleId)
       .pipe(
         catchError((error) => {
-          alert(error.error.errorMessage);
+          this.notifications.error('Error', error.error.errorMessage);
           return EMPTY;
         })
       );

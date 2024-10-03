@@ -13,6 +13,7 @@ import {
 } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { AuthService } from '../shared/services/auth.service';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-login',
@@ -39,6 +40,7 @@ export class LoginComponent {
       Validators.minLength(8),
     ]),
   });
+  notifications = inject(NotificationsService);
 
   login() {
     const email = this.loginForm.controls.email.value!;
@@ -46,7 +48,10 @@ export class LoginComponent {
     this.authService.login(email, password).subscribe((response) => {
       localStorage.setItem('token', response.data.token);
       this.authService.verifyToken();
-      alert('Inicio de sesión correcto');
+      this.notifications.success(
+        'Login exitoso',
+        'Bienvenido a Musical Events'
+      );
       const nextRoute =
         this.authService.role() === 'Administrator' ? '/admin' : '/customer';
       this.router.navigate([nextRoute]);
