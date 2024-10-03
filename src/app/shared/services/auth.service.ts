@@ -10,6 +10,7 @@ import {
 import { catchError, EMPTY, Observable, of } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { NotificationsService } from 'angular2-notifications';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,7 @@ export class AuthService {
   role = signal('');
   isLoggedIn = signal(false);
   notifications = inject(NotificationsService);
+  router = inject(Router);
 
   login(email: string, password: string) {
     return this.http
@@ -93,6 +95,7 @@ export class AuthService {
     this.role.set('');
     this.isLoggedIn.set(false);
     this.notifications.success('Logout exitoso', 'Hasta luego');
+    this.router.navigate(['/home']);
   }
 
   resetPassword(body: ResetPasswordRequestBody) {
