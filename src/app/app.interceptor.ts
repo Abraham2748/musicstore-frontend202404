@@ -1,4 +1,7 @@
 import { HttpInterceptorFn, HttpRequest } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { finalize, tap } from 'rxjs';
 
 export const appInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req);
@@ -13,4 +16,16 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
     });
   }
   return next(clonedRequest);
+};
+
+export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
+  const spinner = inject(NgxSpinnerService);
+  return next(req).pipe(
+    tap(() => {
+      spinner.show();
+    }),
+    finalize(() => {
+      spinner.hide();
+    })
+  );
 };
