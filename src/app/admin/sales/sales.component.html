@@ -1,1 +1,136 @@
-<p>sales works!</p>
+<div class="parent-container">
+  <div class="container">
+    <section class="filters">
+      <form class="form" [formGroup]="filterFormGroup">
+        <div class="genre">
+          <mat-checkbox
+            class="enabled"
+            formControlName="genreEnabled"
+          ></mat-checkbox>
+          <mat-form-field appearance="outline">
+            <mat-label>Género</mat-label>
+            <mat-select formControlName="genre">
+              @for (genre of genres; track $index) {
+              <mat-option [value]="genre">{{ genre }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+          <button
+            mat-flat-button
+            color="primary"
+            (click)="loadSales()"
+            [disabled]="!salesLoaded"
+          >
+            CONSULTAR
+          </button>
+        </div>
+        <div class="event">
+          <mat-checkbox
+            class="enabled"
+            formControlName="eventEnabled"
+          ></mat-checkbox>
+          <mat-form-field appearance="outline">
+            <mat-label>Evento</mat-label>
+            <input type="text" matInput formControlName="event" />
+          </mat-form-field>
+        </div>
+        <div class="date-range-container">
+          <mat-checkbox
+            class="enabled"
+            formControlName="datesEnabled"
+          ></mat-checkbox>
+          <div class="date-range">
+            <mat-form-field appearance="outline">
+              <mat-label>Fecha inicio</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                (click)="picker.open()"
+                formControlName="dateFrom"
+                readonly
+              />
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Fecha fin</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker2"
+                (click)="picker2.open()"
+                formControlName="dateTo"
+                readonly
+              />
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker2"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+    </section>
+    <section class="table">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <!-- client -->
+        <ng-container matColumnDef="client">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Cliente</th>
+          <td mat-cell *matCellDef="let element">{{ element.client }}</td>
+        </ng-container>
+        <!-- event -->
+        <ng-container matColumnDef="event">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Evento</th>
+          <td mat-cell *matCellDef="let element">{{ element.event }}</td>
+        </ng-container>
+        <!-- tickets -->
+        <ng-container matColumnDef="tickets">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Tickets</th>
+          <td mat-cell *matCellDef="let element">{{ element.tickets }}</td>
+        </ng-container>
+        <!-- total -->
+        <ng-container matColumnDef="total">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Total</th>
+          <td mat-cell *matCellDef="let element">{{ element.total }}</td>
+        </ng-container>
+        <!-- eventDate -->
+        <ng-container matColumnDef="eventDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Fecha del Evento
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.eventDate }}
+          </td>
+        </ng-container>
+        <!-- saleDate -->
+        <ng-container matColumnDef="saleDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Fecha de Venta
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.saleDate }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+        <!-- Empty table text -->
+        <tr *matNoDataRow>
+          <td colspan="6">
+            <div class="empty-table">
+              <span class="text"
+                >No hay datos que coincidan con los filtros</span
+              >
+            </div>
+          </td>
+        </tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </section>
+  </div>
+</div>

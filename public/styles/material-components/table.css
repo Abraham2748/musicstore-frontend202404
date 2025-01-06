@@ -1,0 +1,10 @@
+:root {
+  color: slategray;
+  --mat-table-background-color: #51545d;
+  --mat-paginator-container-background-color: #51545d;
+  --mat-table-header-headline-color: var(--primary-color);
+  --mat-table-row-item-label-text-color: whitesmoke;
+  --mat-paginator-container-text-color: whitesmoke;
+  --mat-paginator-disabled-icon-color: var(--secondary-color);
+  --mat-paginator-enabled-icon-color: var(--primary-color);
+}
